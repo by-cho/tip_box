@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "799681195698",
+    "project_id": "tipdips",
+    "storage_bucket": "tipdips.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799681195698:android:01b02ea2d8a679ee55e3ab",
+        "android_client_info": {
+          "package_name": "com.example.tip_dips"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqgtfbiLI1c7XJyGxoRKoDa3l2M2PU0TI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
