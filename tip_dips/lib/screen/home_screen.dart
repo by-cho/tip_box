@@ -1,48 +1,56 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tip_dips/const/tabs.dart';
+import 'package:tip_dips/widget/history_list_item_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEFF8F3),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Color(0xFF035C48),
+                    Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFF035C48),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Color(0xFF035C48),
+                            width: 2,
+                          ),
                         ),
-                        SizedBox(width: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text('Hi'),
-                                SizedBox(width: 6),
-                                Text('Yoon'),
-                              ],
-                            ),
-                            Text('수고했어, 오늘도'),
-                          ],
-                        )
-                      ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Text(
+                            '${_selectedDate.year}년 ${_selectedDate.month}월',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
                     ),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.logout_outlined))
+                        onPressed: () {}, icon: Icon(CupertinoIcons.calendar))
                   ],
                 ),
                 SizedBox(
@@ -55,6 +63,14 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF035C48),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // 그림자의 위치를 조절합니다.
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,13 +130,13 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'This Week Total',
+                            'Monthly Total',
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           Text(
-                            '2023-11-20 ~ 2023-11-26',
+                            '2023-11-01 ~ 2023-11-30',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -264,7 +280,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total Tip History',
+                      'Monthly Tip History',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF305750),
@@ -292,7 +308,16 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                Container(
+                  height: 60 * 7,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 7,
+                    itemBuilder: (context, index) {
+                      return HistoryListItemWidget();
+                    },
+                  ),
+                )
               ],
             ),
           ),
