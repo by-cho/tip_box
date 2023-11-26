@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tip_dips/widget/calendar_widget.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class TipScreen extends StatefulWidget {
   TipScreen({super.key});
@@ -23,39 +25,29 @@ class _TipScreenState extends State<TipScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 2,
-                          color: Color(0xFF035C48),
-                        ),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Column(
-                      children: [
-                        Text(
-                          '2023년',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xFF035C48),
+                  is_Calendar
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              is_Calendar = false;
+                            });
+                          },
+                          icon: Icon(
+                            CupertinoIcons.list_bullet,
+                            size: 35,
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            setState(() {
+                              is_Calendar = true;
+                            });
+                          },
+                          icon: Icon(
+                            CupertinoIcons.calendar,
+                            size: 35,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              '11월',
-                              style: TextStyle(
-                                color: Color(0xFF035C48),
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -73,45 +65,7 @@ class _TipScreenState extends State<TipScreen> {
                 ],
               ),
               Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        is_Calendar = false;
-                      });
-                    },
-                    child: Text(
-                      '일일',
-                      style: TextStyle(
-                          color: is_Calendar
-                              ? Colors.grey[400]
-                              : Color(0xFF035C48),
-                          fontWeight:
-                              is_Calendar ? FontWeight.w400 : FontWeight.w700),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        is_Calendar = true;
-                      });
-                    },
-                    child: Text(
-                      '달력',
-                      style: TextStyle(
-                          color: is_Calendar
-                              ? Color(0xFF035C48)
-                              : Colors.grey[400],
-                          fontWeight:
-                              is_Calendar ? FontWeight.w700 : FontWeight.w400),
-                    ),
-                  ),
-                ],
-              ),
-              Divider(),
-              is_Calendar ? Text('달력') : Text('일일')
+              is_Calendar ? CalendarWidget() : Text('일일'),
             ],
           ),
         ),
