@@ -1,16 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
-  const CalendarWidget({super.key});
+  // final Function(DateTime selectedDay) onDaySelectedCallback;
+  final DateTime? selectedDay;
+  final DateTime focusedDay;
+  final OnDaySelected? onDaySelected;
+
+  const CalendarWidget({
+    Key? key,
+    required this.selectedDay,
+    required this.focusedDay,
+    required this.onDaySelected,
+  }) : super(key: key);
 
   @override
   State<CalendarWidget> createState() => _CalendarWidgetState();
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  DateTime? selectedDay;
-  DateTime focusedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final defaultBoxDesign = BoxDecoration(
@@ -22,49 +31,46 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       ),
     );
 
-    return TableCalendar(
-      locale: 'ko_Kr',
-      focusedDay: focusedDay,
-      firstDay: DateTime(1800),
-      lastDay: DateTime(3000),
-      headerStyle: HeaderStyle(
-        formatButtonVisible: false,
-        titleCentered: true,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: TableCalendar(
+        locale: 'ko_Kr',
+        focusedDay: widget.focusedDay,
+        firstDay: DateTime(1800),
+        lastDay: DateTime(3000),
+        headerStyle: HeaderStyle(
+          formatButtonVisible: false,
+          titleCentered: true,
+        ),
+        calendarStyle: CalendarStyle(
+          defaultDecoration: defaultBoxDesign,
+          weekendDecoration: defaultBoxDesign,
+          todayDecoration: BoxDecoration(
+            color: Color(0xFF38DEBD),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          selectedDecoration: BoxDecoration(
+            color: Color(0xFF035C48),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          defaultTextStyle: TextStyle(
+            color: Color(0xFF035C48),
+            fontWeight: FontWeight.w500,
+          ),
+          outsideDecoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+          ),
+        ),
+        onDaySelected: widget.onDaySelected,
+        selectedDayPredicate: (DateTime date) {
+          if (widget.selectedDay == null) {
+            return false;
+          }
+          return date.year == widget.selectedDay!.year &&
+              date.month == widget.selectedDay!.month &&
+              date.day == widget.selectedDay!.day;
+        },
       ),
-      calendarStyle: CalendarStyle(
-        defaultDecoration: defaultBoxDesign,
-        weekendDecoration: defaultBoxDesign,
-        todayDecoration: BoxDecoration(
-          color: Color(0xFF38DEBD),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        selectedDecoration: BoxDecoration(
-          color: Color(0xFF035C48),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        defaultTextStyle: TextStyle(
-          color: Color(0xFF035C48),
-          fontWeight: FontWeight.w500,
-        ),
-        outsideDecoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-        ),
-      ),
-      onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-        setState(() {
-          print(selectedDay);
-          this.selectedDay = selectedDay;
-          this.focusedDay = selectedDay;
-        });
-      },
-      selectedDayPredicate: (DateTime date) {
-        if (selectedDay == null) {
-          return false;
-        }
-        return date.year == selectedDay!.year &&
-            date.month == selectedDay!.month &&
-            date.day == selectedDay!.day;
-      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tip_dips/screen/calendar_screen.dart';
 import 'package:tip_dips/widget/calendar_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -17,11 +18,11 @@ class _TipScreenState extends State<TipScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFEFF8F3),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Row(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -64,10 +65,10 @@ class _TipScreenState extends State<TipScreen> {
                   ),
                 ],
               ),
-              Divider(),
-              is_Calendar ? CalendarWidget() : Text('일일'),
-            ],
-          ),
+            ),
+            Divider(),
+            is_Calendar ? CalendarScreen() : Text('일일'),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
