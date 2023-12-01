@@ -46,11 +46,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
         SizedBox(
           height: 16,
         ),
-        ListItem(
-          title: 'title title title',
-          itemDate:
-              '${selectedDay?.year} - ${selectedDay?.month} - ${selectedDay?.day}',
-          tip: '38',
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListItem(
+            title: 'title title title',
+            itemDate:
+                '${selectedDay?.year} - ${selectedDay?.month} - ${selectedDay?.day}',
+            tip: '38',
+          ),
         ),
       ],
     );

@@ -36,7 +36,10 @@ class ListItem extends StatelessWidget {
                 SizedBox(
                   height: 6,
                 ),
-                Text(itemDate),
+                Text(
+                  itemDate,
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
               ],
             ),
             Text(

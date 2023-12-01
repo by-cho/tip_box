@@ -5,13 +5,14 @@ import 'package:tip_dips/widget/calendar_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TipScreen extends StatefulWidget {
-  TipScreen({super.key});
+  TipScreen({Key? key}) : super(key: key);
+
   @override
   State<TipScreen> createState() => _TipScreenState();
 }
 
 class _TipScreenState extends State<TipScreen> {
-  bool is_Calendar = false;
+  bool isCalendar = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,11 @@ class _TipScreenState extends State<TipScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  is_Calendar
+                  isCalendar
                       ? IconButton(
                           onPressed: () {
                             setState(() {
-                              is_Calendar = false;
+                              isCalendar = false;
                             });
                           },
                           icon: Icon(
@@ -41,7 +42,7 @@ class _TipScreenState extends State<TipScreen> {
                       : IconButton(
                           onPressed: () {
                             setState(() {
-                              is_Calendar = true;
+                              isCalendar = true;
                             });
                           },
                           icon: Icon(
@@ -52,7 +53,7 @@ class _TipScreenState extends State<TipScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text('Total'),
+                      Text('Monthly Total'),
                       Text(
                         '\$750',
                         style: TextStyle(
@@ -67,7 +68,11 @@ class _TipScreenState extends State<TipScreen> {
               ),
             ),
             Divider(),
-            is_Calendar ? CalendarScreen() : Text('일일'),
+            isCalendar
+                ? Expanded(
+                    child: CalendarScreen(),
+                  )
+                : Text('일일'),
           ],
         ),
       ),
