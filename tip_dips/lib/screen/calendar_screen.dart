@@ -19,43 +19,49 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CalendarWidget(
-          selectedDay: selectedDay,
-          focusedDay: focusedDay,
-          onDaySelected: onDaySelected,
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Container(
-          width: double.infinity,
-          height: 30,
-          decoration: BoxDecoration(
-            color: Color(0xFF38DEBD),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CalendarWidget(
+            selectedDay: selectedDay,
+            focusedDay: focusedDay,
+            onDaySelected: onDaySelected,
           ),
-          child: Center(
-            child: Text(
-              '${selectedDay?.year} - ${selectedDay?.month} - ${selectedDay?.day}',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          SizedBox(
+            height: 16,
+          ),
+          Container(
+            width: double.infinity,
+            height: 30,
+            decoration: BoxDecoration(
+              color: Color(0xFF38DEBD),
             ),
-          ), // null 체크 추가
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListItem(
-            title: 'title title title',
-            itemDate:
+            child: Center(
+              child: Text(
                 '${selectedDay?.year} - ${selectedDay?.month} - ${selectedDay?.day}',
-            tip: '38',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+              ),
+            ), // null 체크 추가
           ),
-        ),
-      ],
+          SizedBox(
+            height: 16,
+          ),
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount: 5,
+          //     itemBuilder: (context, index) {
+          //       return ListItem(
+          //         title: 'title title title',
+          //         itemDate:
+          //             '${selectedDay?.year} - ${selectedDay?.month} - ${selectedDay?.day}',
+          //         tip: '38',
+          //       );
+          //     },
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 

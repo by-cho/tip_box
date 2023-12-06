@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tip_dips/screen/calendar_screen.dart';
-import 'package:tip_dips/widget/calendar_widget.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class TipScreen extends StatefulWidget {
   TipScreen({Key? key}) : super(key: key);
@@ -68,11 +66,7 @@ class _TipScreenState extends State<TipScreen> {
               ),
             ),
             Divider(),
-            isCalendar
-                ? Expanded(
-                    child: CalendarScreen(),
-                  )
-                : Text('일일'),
+            isCalendar ? CalendarScreen() : Text('일일'),
           ],
         ),
       ),
