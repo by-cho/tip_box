@@ -66,7 +66,16 @@ class _TipScreenState extends State<TipScreen> {
               ),
             ),
             Divider(),
-            isCalendar ? CalendarScreen() : Text('일일'),
+            isCalendar
+                ? CalendarScreen()
+                : Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text('등록된 내역이 없습니다.'),
+                    ],
+                  ),
           ],
         ),
       ),
