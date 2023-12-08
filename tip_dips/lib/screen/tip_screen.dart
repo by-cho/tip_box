@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tip_dips/screen/calendar_screen.dart';
 
+import '../widget/bottom_sheet_widget.dart';
+
 class TipScreen extends StatefulWidget {
   TipScreen({Key? key}) : super(key: key);
 
@@ -82,6 +84,23 @@ class _TipScreenState extends State<TipScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your FloatingActionButton's onPressed logic here
+          showBottomSheet(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            context: context,
+            builder: (context) => Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ),
+                AddNewTaskModel(),
+              ],
+            ),
+          );
         },
         backgroundColor: Color(0xFF035C48),
         child: Icon(Icons.add),
