@@ -83,22 +83,13 @@ class _TipScreenState extends State<TipScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your FloatingActionButton's onPressed logic here
-          showBottomSheet(
+          showModalBottomSheet(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             context: context,
-            builder: (context) => Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                ),
-                AddNewTaskModel(),
-              ],
+            isScrollControlled: true, // 높이 제한 없애기
+            builder: (context) => SingleChildScrollView(
+              child: BottomSheetWidget(),
             ),
           );
         },
