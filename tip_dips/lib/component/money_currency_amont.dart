@@ -8,6 +8,7 @@ class MoneyCurrencyAmont extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int count = 0;
     return Column(
       children: [
         Row(
@@ -49,6 +50,18 @@ class MoneyCurrencyAmont extends StatelessWidget {
                         textAlign: TextAlign.center, // Center the text
                       ),
                     ),
+                  ),
+                ),
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Text(
+                    '$count',
+                    style: TextStyle(fontSize: 14),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
